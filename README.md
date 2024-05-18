@@ -1,2 +1,2 @@
 # Interfacing-Traffic-Light
-Using ultrasonic sensor and LPC1768.
+Using ultrasonic sensor, Adruino and LPC1768.
