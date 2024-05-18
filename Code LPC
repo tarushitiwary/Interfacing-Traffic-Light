@@ -1,1 +1,56 @@
+#include "lpc214x.h"  // Header file for LPC2148
+// Define the GPIO pins for the traffic lights
+#define RED_PIN (1 << 0)   // P0.0 for Red LED
+#define YELLOW_PIN (1 << 1) // P0.1 for Yellow LED
+#define GREEN_PIN (1 << 2)  // P0.2 for Green LED
+// Define delay functions
+void delay_ms(unsigned int delay)
+{
+    unsigned int i;
+    unsigned int j;
+    for (i = 0; i < delay; i++)
+    {
+        for (j = 0; j < 60000; j++)
+        {
+            // Do nothing, just wait
+        }
+    }
+}
+// Initialize GPIO pins for the traffic light
+void traffic_light_init(void)
+{
+    // Configure P0.0, P0.1, and P0.2 as output pins
+    IODIR0 |= RED_PIN | YELLOW_PIN | GREEN_PIN;
+    
+    // Turn off all lights initially
+    IOCLR0 = RED_PIN | YELLOW_PIN | GREEN_PIN;
+}// Control traffic lights according to the standard sequence
+void traffic_light_sequence(void)
+{
+    while (1)
+    {
+        // Turn on Green light for 5 seconds
+        IOCLR0 = RED_PIN | YELLOW_PIN; // Turn off Red and Yellow
+        IOSET0 = GREEN_PIN; // Turn on Green
+        delay_ms(5000); // Wait for 5 seconds
+         // Turn on Yellow light for 2 seconds
+        IOCLR0 = GREEN_PIN; // Turn off Green
+        IOSET0 = YELLOW_PIN; // Turn on Yellow
+        delay_ms(2000); // Wait for 2 seconds
+          // Turn on Red light for 5 seconds
+        IOCLR0 = YELLOW_PIN; // Turn off Yellow
+        IOSET0 = RED_PIN; // Turn on Red
+        delay_ms(5000); // Wait for 5 seconds
+    }
+}
+int main(void)
+{
+    // Initialize the traffic light system
+    traffic_light_init();
 
+    // Run the traffic light sequence in a loop
+    traffic_light_sequence();
+
+    // We should never reach here, as traffic_light_sequence runs indefinitely
+    return 0;
+}
