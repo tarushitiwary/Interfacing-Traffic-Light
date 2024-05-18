@@ -1,0 +1,51 @@
+const int trigPin
+=
+3;
+const int echoPin = 2;
+int led1 = 8;
+int led2 = 9;
+int led3 = 10;
+long duration;
+int distance;
+void setup() {
+}
+pinMode (trigPin, OUTPUT); // Sets the trigPin as an Output
+pinMode (echoPin, INPUT); // Sets the echoPin as an Input
+pinMode (led1, OUTPUT);
+pinMode(led2, OUTPUT);
+pinMode (led3, OUTPUT);
+Serial.begin(9600); // Starts the serial communication
+void loop() {
+// clears the trigPin
+digitalWrite (trigPin, LOW);
+delayMicroseconds (2);
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin,
+delayMicroseconds (10) ;
+HIGH);
+digitalWrite (trigPin, LOW);
+// Reads the echopin, returns the sound wave travel time in microseconds
+duration = pulse In (echoPin, HIGH);
+// Calculating the distance
+distance = duration * 0.034 / 2;
+// Prints the distance on the Serial Monitor
+Serial.print ("Distance: ");
+Serial.println (distance);
+if (distance >= 325) {
+}
+digitalWrite(ledl,
+HIGH);
+digitalWrite(led2, LOW);
+digitalWrite(led3, LOW);
+else if (distance >= 100 && distance <325) {
+}
+}
+digitalWrite(ledl, LOW);
+digitalWrite(led2, HIGH);
+digitalWrite(led3, LOW);
+else if (distance >= 0 && distance < 100) {
+}
+digitalWrite(ledl, LOW);
+digitalWrite(led2, LOW);
+digitalWrite(led3, HIGH);||
+delay(100); // Wait for 100 milliseconds
